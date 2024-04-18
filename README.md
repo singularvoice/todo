@@ -35,6 +35,8 @@ To run the project on your local machine, follow these steps:
 2. Navigate to the project directory:
 3. Install dependencies:
 ``pip install -r requirements.txt``
+4. Create migrations
+``python manage.py makemigrations``
 4. Run migrations to create the database:
 ``python manage.py migrate``
 
