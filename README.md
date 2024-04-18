@@ -31,7 +31,7 @@ To run the project on your local machine, follow these steps:
 ### Installation
 
 1. Clone the repository:
- ``git clone https://github.com/your-username/todo-app.git``
+ ``git clone git@github.com:singularvoice/todo.git``
 2. Navigate to the project directory:
 3. Install dependencies:
 ``pip install -r requirements.txt``
