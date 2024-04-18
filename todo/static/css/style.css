@@ -634,6 +634,10 @@ video {
   align-items: center;
 }
 
+.items-end {
+  align-items: end;
+}
+
 .justify-center {
   justify-content: center;
 }
@@ -866,6 +870,10 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-black-primary{
+  color: #212121
 }
 
 .underline {

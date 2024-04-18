@@ -9,19 +9,22 @@
             href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
             rel="stylesheet"
     />
-    <link rel="stylesheet" href="{% static 'style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     <title>Todo List</title>
 </head>
 <body
         class="bg-[#cfcfcf] flex flex-col items-center justify-center gap-4 h-screen"
+        style="background-color: #424242"
 >
 <!-- header -->
 <header
         class="bg-white shadow-lg w-10/12 h-auto rounded-3xl flex flex-col sm:flex-row justify-between items-center p-5 m-7 md:w-3/6"
 >
-    <h1 class="text-blue-600 font-bold text-[40px]">Todo List</h1>
+    <h1 class="text-black-primary font-bold text-[40px]">Todo List</h1>
     <a
             class="bg-blue-600 py-2 px-4 text-white font-semibold rounded-2xl text-lg flex items-center gap-2"
+            style="background-color: #212121"
+
             href="{% url 'home' %}"
     >
         <i class="bx bxs-left-arrow-circle bx-sm"></i> Go Back
