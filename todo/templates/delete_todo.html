@@ -10,7 +10,7 @@
             rel="stylesheet"
     />
     <link rel="stylesheet" href="{% static 'style.css' %}" />
-    <title>Quick ToDo</title>
+    <title>Todo List</title>
   </head>
   <body
     class="bg-[#cfcfcf] flex flex-col items-center justify-center gap-4 h-screen"
@@ -19,7 +19,7 @@
     <header
       class="bg-white shadow-lg w-10/12 h-auto rounded-3xl flex flex-col sm:flex-row justify-between items-center p-5 m-7 md:w-3/6"
     >
-      <h1 class="text-blue-600 font-bold text-[40px]">Quick ToDo</h1>
+      <h1 class="text-blue-600 font-bold text-[40px]">Todo List</h1>
       <a
         class="bg-blue-600 py-2 px-4 text-white font-semibold rounded-2xl text-lg mt-4 flex items-center gap-2"
         href="{% url 'home' %}"
@@ -48,8 +48,8 @@
             Are you sure you want to delete "<span
               class="text-green-500 font-semibold text-lg"
             >
-              Create a ToDo App with Django </span
-            >"?. <br />This actioin is irreversible.
+              {{ todo.title }} </span
+            >"?. <br />This action is irreversible.
           </h2>
         </div>
         <!-- Line -->
@@ -57,12 +57,12 @@
         <!-- Bottom: Time and Date | Delete -->
         <div class="flex flex-row justify-around">
           <a
-            href=""
+            href="{{ request.META.HTTP_REFERER }}"
             class="py-1 px-2 bg-blue-600 rounded-xl flex items-center gap-1 text-white font-semibold"
             ><i class="bx bxs-left-arrow-circle"></i> Go Back</a
           >
           <a
-            href=""
+            href="{% url 'delete_todo' todo.id %}"
             class="py-1 px-2 bg-red-600 rounded-xl flex items-center gap-1 text-white font-semibold"
             ><i class="bx bxs-trash"></i> Yes, Delete</a
           >

@@ -1,9 +1,4 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
-from django.http import JsonResponse
-from django.urls import reverse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import TodoItem
 
 
@@ -19,44 +14,43 @@ def remaining(request):
 
 def completed(request):
     todos = TodoItem.objects.all().filter(completed=True)
-    return render(request, 'completed.html',{'todos': todos})
+    return render(request, 'completed.html', {'todos': todos})
 
 
 def add_todo(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        due_date = request.POST.get('due_date')
+        due_time = request.POST.get('due_time')
+
+        if title != "":
+            todo = TodoItem(title=title, description=description, due_date=due_date, due_time=due_time, completed=False)
+            todo.save()
+            return redirect('home')
     return render(request, 'add_todo.html')
 
 
-def delete_todo(request):
-    return render(request, 'delete_todo.html')
+def request_to_delete_todo(request,todo_id):
+    todo = TodoItem.objects.get(id=todo_id)
+    return render(request, 'delete_todo.html',{'todo':todo})
 
 
-def todo_detail(request):
-    return render(request,'task_detail.html')
+def todo_detail(request, todo_id):
+    todo = TodoItem.objects.get(id=todo_id)
+    return render(request, 'todo_detail.html', {'todo': todo})
 
 
-# def todo_list(request):
-#     todos = TodoItem.objects.all()
-#     return render(request, 'todo_list.html', {'todos': todos})
-#
-#
-# def add_todo(request):
-#     if request.method == 'POST':
-#         title = request.POST.get('title')
-#         TodoItem.objects.create(title=title)
-#         return redirect('todo_list')
-#     return render(request, 'add_todo.html')
-#
-#
-# def delete_todo(request, todo_id):
-#     todo = TodoItem.objects.get(id=todo_id)
-#     todo.delete()
-#     return redirect('todo_list')
-#
-#
-# def toggle_todo(request,todo_id):
-#     if request.method == 'POST':
-#         todo = get_object_or_404(TodoItem, pk=todo_id)
-#         todo.completed = not todo.completed  # Toggle completed status
-#         todo.save()
-#         return HttpResponseRedirect(reverse('todo_list'))
-#     return HttpResponseRedirect(reverse('todo_list'))
+def toggle_todo(request, todo_id):
+    todo = get_object_or_404(TodoItem, id=todo_id)
+    todo.completed = not todo.completed  # Toggle completed status
+    todo.save()
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+def delete_todo(request, todo_id):
+    todo = TodoItem.objects.get(id=todo_id)
+    todo.delete()
+    return redirect('home')
+
+
